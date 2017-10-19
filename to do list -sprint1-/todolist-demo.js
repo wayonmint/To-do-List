@@ -1,11 +1,13 @@
 
 var taskInput = document.getElementById("new-task");
+var txt = document.getElementsByTagName("textarea")[0];
 var addButton = document.getElementsByTagName("button")[0];
 var incompleteTasksHolder = document.getElementById("incomplete-tasks");
 var completedTasksHolder = document.getElementById("completed-tasks");
 var deadline = document.getElementById("deadline");
 
-var createNewTaskElement = function(taskString) {
+
+var createNewTaskElement = function(taskString,str) {
 
     if(taskInput.value != ""){
        var listItem = document.createElement("li");
@@ -16,6 +18,7 @@ var createNewTaskElement = function(taskString) {
   var editButton = document.createElement("button");
   var deleteButton = document.createElement("button");
   
+  
   checkBox.type = "checkbox";
   editInput.type = "text";
   
@@ -23,8 +26,8 @@ var createNewTaskElement = function(taskString) {
   editButton.className = "edit";
   deleteButton.innerText = "Delete";
   deleteButton.className = "delete";
-  
-  label.innerText = taskString +"    deadline: <"+ deadline.value+">";
+   
+  label.innerText = taskString + " deadline: <"+ deadline.value+">" + str;
   
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
@@ -38,11 +41,12 @@ var createNewTaskElement = function(taskString) {
 
 var addTask = function() {
   console.log("Add task...");
-  var listItem = createNewTaskElement(taskInput.value);
+  var listItem = createNewTaskElement(taskInput.value,txt.value);
   incompleteTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);  
   
-  taskInput.value = "";   
+  taskInput.value = "";  
+
 }
 
 var editTask = function() {
